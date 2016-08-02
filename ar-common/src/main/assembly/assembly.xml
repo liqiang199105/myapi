@@ -15,12 +15,11 @@
 			<outputDirectory>bin</outputDirectory>
 			<includes>
 				<include>start.sh</include>
-				<include>start.bat</include>
 			</includes>
 		</fileSet>
 
 		<fileSet>
-			<directory>src/main/resources</directory>
+			<directory>src/main/resources/config</directory>
 			<outputDirectory>conf</outputDirectory>
 			<includes>
 				<include>arapi.properties</include>

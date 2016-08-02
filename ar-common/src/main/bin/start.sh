@@ -8,4 +8,4 @@ then
 fi
 sleep 2
 JVM_ARGS="-Xms256m -Xmx256m -Xloggc:../logs/gc.log"
-java $JVM_ARGS -cp ../conf:../lib/ar-web-1.0-SNAPSHOT.jar com.netease.ar.web.AppMain $@ 2>&1
+java $JVM_ARGS -cp ../conf:../lib/ar-common-1.0-SNAPSHOT.jar com.netease.ar.common.AppMain $@ 2>&1
