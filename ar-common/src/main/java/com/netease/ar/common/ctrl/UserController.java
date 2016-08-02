@@ -30,7 +30,7 @@ public class UserController {
 		logger.info(request.getRequestURI());
 
 		Map<String, Object> map = Maps.newLinkedHashMap();
-		userService.get(0L);
+		userService.get("0");
 		JsonResponseBuilder.buildResp(response, map);
 
 	}

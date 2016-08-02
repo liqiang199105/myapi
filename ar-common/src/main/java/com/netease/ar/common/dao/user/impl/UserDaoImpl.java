@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
     private SqlSession sqlSession;
 
     @Override
-    public UserModel get(final long userId){
+    public UserModel get(final String userId){
         return (UserModel) sqlSession.selectOne(namespace + "get", userId);
     }
 }

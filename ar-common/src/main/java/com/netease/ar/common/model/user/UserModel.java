@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class UserModel implements Serializable {
 
-	private long userId;
+	private String userId;
 	private long userNum;
 	private String nick;
 	private String avatar;
@@ -88,11 +88,11 @@ public class UserModel implements Serializable {
 		this.createdTime = createdTime;
 	}
 
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 }

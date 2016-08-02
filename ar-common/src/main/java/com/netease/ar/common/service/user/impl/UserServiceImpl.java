@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService{
 
     @Resource private UserDao userDao;
 
-    public UserModel get(final long userId){
+    public UserModel get(final String userId){
         return userDao.get(userId);
     }
 }

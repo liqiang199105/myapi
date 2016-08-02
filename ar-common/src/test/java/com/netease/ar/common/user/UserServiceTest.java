@@ -13,7 +13,7 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testGetUserInfo(){
-        System.out.println(userService.get(-9219412352562510775L));
+        System.out.println(userService.get("1"));
     }
 
 

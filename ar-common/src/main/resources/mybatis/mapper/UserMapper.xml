@@ -5,7 +5,6 @@
 <mapper namespace="user">
 	<resultMap id="userMap" type="com.netease.ar.common.model.user.UserModel">
 		<result column="user_id" property="userId"/>
-		<result column="user_num" property="userNum"/>
 		<result column="nick" property="nick"/>
 		<result column="avatar" property="avatar"/>
 		<result column="mail" property="mail"/>
@@ -13,7 +12,7 @@
 	</resultMap>
 	
 	<select id="get" parameterType="map" resultMap="userMap">
-		SELECT * from user_account where user_id = #{user_id}
+		SELECT * from user where user_id = #{user_id}
 	</select>
 	
 
