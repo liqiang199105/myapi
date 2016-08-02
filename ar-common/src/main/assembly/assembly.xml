@@ -23,6 +23,8 @@
 			<outputDirectory>conf</outputDirectory>
 			<includes>
 				<include>arapi.properties</include>
+				<include>log4j</include>
+				<include>config-base-${profiles.active}.properties</include>
 			</includes>
 		</fileSet>
 	</fileSets>
