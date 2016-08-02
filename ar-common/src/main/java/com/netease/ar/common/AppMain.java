@@ -94,6 +94,5 @@ public class AppMain {
 		CommandLine cmd = parser.parse(options, args);
 		int port = Integer.parseInt(cmd.getOptionValue("port", DEFAULT_CENTRAL_PORT));
 		new AppMain(port).start();
-		System.out.println("start sucess!");
 	}
 }
