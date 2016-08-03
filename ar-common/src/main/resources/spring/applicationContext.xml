@@ -69,5 +69,14 @@
 
     <tx:annotation-driven transaction-manager="txManager" />
 
+    <bean id="sMSForBoBoWebSercice" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://www.bobo.com/spe-data/api/remote/sms.htm</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.netease.vshow.special.service.SMSForBoBoWebSercice</value>
+        </property>
+    </bean>
+
 
 </beans>

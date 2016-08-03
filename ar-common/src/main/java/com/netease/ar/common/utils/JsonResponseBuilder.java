@@ -13,8 +13,6 @@ import java.util.Map;
 public class JsonResponseBuilder {
 	private static Logger logger = Logger.getLogger(JsonResponseBuilder.class);
 
-
-
 	@Deprecated
 	public static String build(HttpServletResponse response, JSONObject result) {
 		response.setContentType("application/json;charset=UTF-8");
