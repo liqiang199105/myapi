@@ -1,6 +1,5 @@
 package com.netease.ar.common.http;
 
-import com.google.common.collect.Maps;
 import com.netease.ar.common.utils.JsonUtil;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -14,7 +13,7 @@ import java.util.Map;
 public class ApiResponseBuilder {
 	private static Logger logger = Logger.getLogger(ApiResponseBuilder.class);
 
-	public static String build(HttpServletResponse response, JSONObject result) {
+	public static void build(HttpServletResponse response, JSONObject result) {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			PrintWriter writer = response.getWriter();
@@ -23,10 +22,9 @@ public class ApiResponseBuilder {
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
-		return null;
 	}
 
-	public static String buildResp(HttpServletResponse response, Map<String, Object> result) {
+	public static void build(HttpServletResponse response, Map<String, Object> result) {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			PrintWriter writer = response.getWriter();
@@ -35,10 +33,9 @@ public class ApiResponseBuilder {
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
-		return null;
 	}
 
-	public static String buildResp(HttpServletResponse response, ApiResponseBody result) {
+	public static void build(HttpServletResponse response, ApiResponseBody result) {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			PrintWriter writer = response.getWriter();
@@ -47,70 +44,9 @@ public class ApiResponseBuilder {
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
-		return null;
 	}
 
-	public static String buildSuccResp(HttpServletResponse response) {
-		Map<String, Object> result = Maps.newHashMap();
-		result.put("success", 200);
-		response.setContentType("application/json;charset=UTF-8");
-		try {
-			PrintWriter writer = response.getWriter();
-			JsonUtil.writeJson(result, writer);
-			writer.flush();
-		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
-		}
-		return null;
-	}
-
-	public static String buildErrorResp(HttpServletResponse response, Integer errorCode, String errorMessage) {
-		return buildErrorResp(response,errorCode,errorMessage,null);
-	}
-	
-	public static String buildErrorResp(HttpServletResponse response, Integer errorCode, String errorMessage, Map<String,Object> extInfo) {
-		Map<String, Object> result = Maps.newHashMap();
-		result.put("success", errorCode);
-		result.put("error", errorMessage);
-		if(extInfo!=null){
-			result.putAll(extInfo);
-		}
-		response.setContentType("application/json;charset=UTF-8");
-		try {
-			PrintWriter writer = response.getWriter();
-			JsonUtil.writeJson(result, writer);
-			writer.flush();
-		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
-		}
-		return null;
-	}
-
-	public static String buildResp(HttpServletResponse response, Map<String, Object> result, String callback) {
-		if (StringUtils.isNotBlank(callback)) {
-			response.setContentType("text/javascript;charset=UTF-8");
-			try {
-				PrintWriter writer = response.getWriter();
-				writer.append(callback).append('(')
-						.append(JsonUtil.toJson(result)).append(");");
-				writer.flush();
-			} catch (IOException e) {
-				logger.error(e.getMessage(), e);
-			}
-		} else {
-			response.setContentType("application/json;charset=UTF-8");
-			try {
-				PrintWriter writer = response.getWriter();
-				JsonUtil.writeJson(result, writer);
-				writer.flush();
-			} catch (IOException e) {
-				logger.error(e.getMessage(), e);
-			}
-		}
-		return null;
-	}
-
-	public static <T> void buildRespCallback(HttpServletResponse response, T result, String callback){
+	public static <T> void buildCallback(HttpServletResponse response, T result, String callback){
 		if (StringUtils.isNotBlank(callback)) {
 			response.setContentType("text/javascript;charset=UTF-8");
 			try {
@@ -120,7 +56,7 @@ public class ApiResponseBuilder {
 			} catch (IOException e) {
 				logger.error(e.getMessage(), e);
 			}
-		}else{
+		} else {
 			response.setContentType("application/json;charset=UTF-8");
 			try {
 				PrintWriter writer = response.getWriter();

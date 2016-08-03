@@ -34,7 +34,7 @@ public class UserController {
 
 		Map<String, Object> map = Maps.newLinkedHashMap();
 		userService.get("0");
-		ApiResponseBuilder.buildResp(response, map);
+		ApiResponseBuilder.build(response, map);
 
 	}
 
@@ -60,7 +60,7 @@ public class UserController {
 			logger.error("发送短信失败");
 			e.printStackTrace();
 		}
-		ApiResponseBuilder.buildResp(response, Maps.<String, Object>newHashMap());
+		ApiResponseBuilder.build(response, Maps.<String, Object>newHashMap());
 
 
 	}

@@ -1,7 +1,6 @@
 package com.netease.ar.common.http;
 
 import com.netease.ar.common.exception.ApiError;
-import net.sf.json.JSONObject;
 
 public class ApiResponseBody {
     //-------------------------------------------------------------
