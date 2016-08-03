@@ -7,7 +7,7 @@ public class ApiResponseBody {
     //-------------------------------------------------------------
     // Variables - Private
     //-------------------------------------------------------------
-    private Result result = Result.SUCCESS;
+    private Result result = Result.success;
     private int code = 1000000;
     private Object info = new Object[0];
     private String[] errorMsg = new String[0];
@@ -31,7 +31,7 @@ public class ApiResponseBody {
     }
 
     public ApiResponseBody(final ApiError apiError) {
-        this(Result.FAIL, apiError.getCode(), null, new String[]{apiError.getMessage()});
+        this(Result.fail, apiError.getCode(), null, new String[]{apiError.getMessage()});
     }
 
     public ApiResponseBody(final ApiError apiError, final String errorMsg) {
@@ -75,6 +75,6 @@ public class ApiResponseBody {
     // Inner Class
     //-------------------------------------------------------------
     public static enum Result {
-        SUCCESS, FAIL;
+        success, fail;
     }
 }
