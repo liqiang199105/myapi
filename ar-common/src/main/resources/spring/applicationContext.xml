@@ -69,7 +69,7 @@
 
     <tx:annotation-driven transaction-manager="txManager" />
 
-    <bean id="smsWebSercice" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+    <bean id="smsWebService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
         <property name="serviceUrl">
             <value>http://www.bobo.com/spe-data/api/remote/sms.htm</value>
         </property>
@@ -78,6 +78,6 @@
         </property>
     </bean>
 
-    <bean id="apiResponseExceptionResolver" class="com.netease.ar.common.exception.ApiResponseExceptionResolver"/>
+    <bean id="apiResponseExceptionResolver" class="com.netease.ar.common.http.exception.ApiResponseExceptionResolver"/>
 
 </beans>

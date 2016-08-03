@@ -1,4 +1,4 @@
-package com.netease.ar.common.exception;
+package com.netease.ar.common.http.exception;
 
 public class ApiException extends RuntimeException {
     private final ApiError apiError;

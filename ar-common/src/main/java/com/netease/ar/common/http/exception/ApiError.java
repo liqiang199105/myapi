@@ -1,12 +1,10 @@
-package com.netease.ar.common.exception;
+package com.netease.ar.common.http.exception;
 
 import org.springframework.http.HttpStatus;
 
 public enum ApiError {
 
-
-
-    //System
+    // System
     INVALID_API_SYSTEM(1000001, "Invalid API"),
     INVALID_SESSIONKEY(1000002, "Invalid SessionKey (System)"),
     API_TIMESTAMP_OUT_OF_RANGE(1000003, "Request over 10min"),
@@ -22,7 +20,16 @@ public enum ApiError {
     INVALID_SIGNATURE(1000018, "Invalid signature (System)"),
     MISSING_REQUIRED_PARAMETER(1000019, "Missing required parameters: {%s} (System)"),
     INVALID_PARAMETER(1000020, "Invalid parameter"),
-    SERVER_BUSY(1000021,"Server Busy (System)");
+    SERVER_BUSY(1000021,"Server Busy (System)"),
+
+    // Phone
+    USER_INVALID_PHONE(1002001, "Invalid phone number (Sms)"),
+    USER_VERIFY_CODE_INCORRECT(1002002, "Incorrect verify code (Sms)"),
+    USER_INVALID_PHONE_PWD(1002003, "Invalid phone or password (Sms)"),
+    SMS_PHONE_BLACKLISTED(1002004, "Sms phone blacklisted (Sms)"),
+    SMS_SEND_MESSAGE_FAILED(1002005, "Sending message failed. (Sms)"),
+
+    ;
 
 
     private final int code;

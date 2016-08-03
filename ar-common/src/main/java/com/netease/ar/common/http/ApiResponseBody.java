@@ -1,13 +1,13 @@
 package com.netease.ar.common.http;
 
-import com.netease.ar.common.exception.ApiError;
+import com.netease.ar.common.http.exception.ApiError;
 
 public class ApiResponseBody {
     //-------------------------------------------------------------
     // Variables - Private
     //-------------------------------------------------------------
     private Result result = Result.success;
-    private int code = 1000000;
+    private int code = 200;
     private Object info = new Object[0];
     private String[] errorMsg = new String[0];
 

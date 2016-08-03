@@ -1,4 +1,4 @@
-package com.netease.ar.common.exception;
+package com.netease.ar.common.http.exception;
 
 import com.netease.ar.common.http.ApiResponseBody;
 import org.apache.log4j.Logger;
