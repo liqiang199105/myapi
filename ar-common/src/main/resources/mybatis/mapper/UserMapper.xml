@@ -7,13 +7,21 @@
 		<result column="user_id" property="userId"/>
 		<result column="nick" property="nick"/>
 		<result column="avatar" property="avatar"/>
+		<result column="password" property="password"/>
+		<result column="verify_code" property="verifyCode"/>
 		<result column="mail" property="mail"/>
 		<result column="phone" property="phone"/>
+		<result column="last_modified" property="lastModified"/>
 	</resultMap>
 	
 	<select id="get" parameterType="map" resultMap="userMap">
 		SELECT * from user where user_id = #{user_id}
 	</select>
+
+	<insert id="replacePhoneVerifyCode" parameterType="com.netease.ar.common.model.user.UserModel">
+		replace into user(user_id,phone,verify_code,create_time)
+		values(#{userId},#{phone},#{code},#{verifyCode},#{createTime});
+	</insert>
 	
 
 </mapper>

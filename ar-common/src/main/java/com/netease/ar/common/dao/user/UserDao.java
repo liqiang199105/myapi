@@ -6,4 +6,6 @@ import com.netease.ar.common.model.user.UserModel;
 public interface UserDao {
 
     public UserModel get(final String userId);
+
+    public void replacePhoneVerifyCode(final UserModel userModel);
 }

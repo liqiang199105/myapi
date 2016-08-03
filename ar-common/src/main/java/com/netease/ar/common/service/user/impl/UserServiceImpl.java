@@ -14,7 +14,14 @@ public class UserServiceImpl implements UserService{
 
     @Resource private UserDao userDao;
 
+    @Override
     public UserModel get(final String userId){
         return userDao.get(userId);
+    }
+
+    @Override
+    public UserModel register(final String phone, final String verifyCode){
+        userDao.replacePhoneVerifyCode(new UserModel());
+        return userDao.get(phone);
     }
 }
