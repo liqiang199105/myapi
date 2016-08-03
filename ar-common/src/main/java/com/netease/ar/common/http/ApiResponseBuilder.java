@@ -1,6 +1,7 @@
-package com.netease.ar.common.utils;
+package com.netease.ar.common.http;
 
 import com.google.common.collect.Maps;
+import com.netease.ar.common.utils.JsonUtil;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -10,10 +11,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class JsonResponseBuilder {
-	private static Logger logger = Logger.getLogger(JsonResponseBuilder.class);
+public class ApiResponseBuilder {
+	private static Logger logger = Logger.getLogger(ApiResponseBuilder.class);
 
-	@Deprecated
 	public static String build(HttpServletResponse response, JSONObject result) {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
@@ -27,6 +27,18 @@ public class JsonResponseBuilder {
 	}
 
 	public static String buildResp(HttpServletResponse response, Map<String, Object> result) {
+		response.setContentType("application/json;charset=UTF-8");
+		try {
+			PrintWriter writer = response.getWriter();
+			JsonUtil.writeJson(result, writer);
+			writer.flush();
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
+		}
+		return null;
+	}
+
+	public static String buildResp(HttpServletResponse response, ApiResponseBody result) {
 		response.setContentType("application/json;charset=UTF-8");
 		try {
 			PrintWriter writer = response.getWriter();

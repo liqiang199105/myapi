@@ -3,11 +3,10 @@ package com.netease.ar.common.ctrl;
 import com.google.common.collect.Maps;
 import com.netease.ar.common.model.user.UserModel;
 import com.netease.ar.common.service.user.UserService;
-import com.netease.ar.common.utils.JsonResponseBuilder;
+import com.netease.ar.common.http.ApiResponseBuilder;
 import com.netease.vshow.special.service.SMSForBoBoWebSercice;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +24,7 @@ public class UserController {
 	private static Logger logger = Logger.getLogger(UserController.class);
 
 	@Resource private UserService userService;
-	@Resource @Qualifier("sMSForBoBoWebSercice") private SMSForBoBoWebSercice sMSForBoBoWebService;
+	@Resource @Qualifier("smsWebSercice") private SMSForBoBoWebSercice smsWebSercice;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public void reversion(@RequestBody UserModel userModel, HttpServletRequest request, HttpServletResponse response) {
@@ -33,7 +32,7 @@ public class UserController {
 
 		Map<String, Object> map = Maps.newLinkedHashMap();
 		userService.get("0");
-		JsonResponseBuilder.buildResp(response, map);
+		ApiResponseBuilder.buildResp(response, map);
 
 	}
 
@@ -42,10 +41,10 @@ public class UserController {
 	public void sendAuthCode(HttpServletRequest request, HttpServletResponse response) {
 		logger.info(request.getRequestURI());
 		try {
-			String phone = "15810530155";
+			String phone = "13552862889";
 			String message = "AR API";
 			String ctcode = "86";
-			JSONObject resp = JSONObject.fromObject(sMSForBoBoWebService.sendSMS(phone, message, ctcode));
+			JSONObject resp = JSONObject.fromObject(smsWebSercice.sendSMS(phone, message, ctcode));
 			String code = resp.getString("respCode");
 			if (code.equals("10000")) {
 				logger.error("手机号不存在");
@@ -59,7 +58,7 @@ public class UserController {
 			logger.error("发送短信失败");
 			e.printStackTrace();
 		}
-		JsonResponseBuilder.buildResp(response, Maps.<String, Object>newHashMap());
+		ApiResponseBuilder.buildResp(response, Maps.<String, Object>newHashMap());
 
 	}
 
