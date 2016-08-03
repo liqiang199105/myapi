@@ -1,6 +1,8 @@
 package com.netease.ar.common.ctrl;
 
 import com.google.common.collect.Maps;
+import com.netease.ar.common.exception.ApiError;
+import com.netease.ar.common.exception.ApiException;
 import com.netease.ar.common.model.user.UserModel;
 import com.netease.ar.common.service.user.UserService;
 import com.netease.ar.common.http.ApiResponseBuilder;
@@ -59,6 +61,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		ApiResponseBuilder.buildResp(response, Maps.<String, Object>newHashMap());
+
 
 	}
 

@@ -37,6 +37,7 @@ public class AdminController {
 		}
 		logger.info(map);
 		ApiResponseBuilder.buildResp(response, new ApiResponseBody(map));
+//		throw new ApiException(ApiError.INVALID_API_FORMAT);
 	}
 
 }
