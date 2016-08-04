@@ -80,4 +80,16 @@
 
     <bean id="apiResponseExceptionResolver" class="com.netease.ar.common.http.exception.ApiResponseExceptionResolver"/>
 
+    <mvc:annotation-driven/>
+    <!-- Handler Mappings -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.netease.ar.common.http.intercepter.ApiSignatureInterceptor">
+                <property name="enableUrlSignature" value="${painter.signature.enable}"/>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
 </beans>

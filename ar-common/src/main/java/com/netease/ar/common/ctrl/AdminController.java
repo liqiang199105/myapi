@@ -3,6 +3,7 @@ package com.netease.ar.common.ctrl;
 import com.google.common.collect.Maps;
 import com.netease.ar.common.http.ApiResponseBody;
 import com.netease.ar.common.http.ApiResponseBuilder;
+import com.netease.ar.common.http.intercepter.AllowNoSignature;
 import com.netease.ar.common.utils.SpringAppConfig;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class AdminController {
 	private static Logger logger = Logger.getLogger(AdminController.class);
 
 	@RequestMapping(value = "/reversion", method = RequestMethod.GET)
+	@AllowNoSignature
 	public void reversion(HttpServletRequest request, HttpServletResponse response) {
 		SpringAppConfig configs[] = new SpringAppConfig[]{
 				SpringAppConfig.APP_VERSION_MAVEN,
