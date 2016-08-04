@@ -7,7 +7,7 @@ public enum ApiError {
     // System
     INVALID_API_SYSTEM(1000001, "Invalid API"),
     INVALID_SESSIONKEY(1000002, "Invalid SessionKey (System)"),
-    API_TIMESTAMP_OUT_OF_RANGE(1000003, "Request over 10min"),
+    API_TIMESTAMP_OUT_OF_RANGE(1000003, "Request over time (System)"),
     INVALID_API_FORMAT(1000004, "Invalid response format"),
     INVALID_API_VERSION(1000005, "Invalid version, Please update your application."),
     INVALID_APP_CLIENT(1000006, "Invalid APP Client", HttpStatus.UNAUTHORIZED),

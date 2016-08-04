@@ -8,6 +8,11 @@ import java.util.*;
 
 public class ApiSignatureUtil {
 
+    public static final String SIGNATURE = "sign";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String APP_KEY = "appKey";
+    public static final String NONCE_STRING = "nonceStr";
+
     /***
      * This method generates the signature given the parameters.  NOTE: it does *no* error-checking
      * (for the sake of speed) and will throw various errors if the parameters aren't formed as expected.
@@ -20,14 +25,12 @@ public class ApiSignatureUtil {
     public static String generateSignature(final Map<String, String> parameters) throws UnsupportedEncodingException {
         List<String> sortedKeys = new ArrayList<>(parameters.keySet());
         Collections.sort(sortedKeys);
-
         StringBuilder sb = new StringBuilder();
         for (String key : sortedKeys) {
             sb.append(key);
             sb.append(parameters.get(key));
         }
-
-        return DigestUtils.md5DigestAsHex(sb.toString().getBytes("UTF-8")).toUpperCase();
+        return DigestUtils.md5DigestAsHex(sb.toString().getBytes("UTF-8")).toLowerCase();
     }
 
 }
