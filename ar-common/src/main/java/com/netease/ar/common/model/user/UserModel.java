@@ -6,6 +6,12 @@ import java.util.Date;
 public class UserModel implements Serializable {
 	private String userId;
 	private String nick;
+	private String avatar;
+	private String mail;
+	private String phone;
+	private String token;
+	private String verifyCode;
+	private Date lastModified;
 
 	public UserModel(String userId, String nick, String avatar, String mail, String phone, String verifyCode, Date lastModified) {
 		this.userId = userId;
@@ -19,12 +25,6 @@ public class UserModel implements Serializable {
 
 	public UserModel() {
 	}
-
-	private String avatar;
-	private String mail;
-	private String phone;
-	private String verifyCode;
-	private Date lastModified;
 
 	public String getUserId() {
 		return userId;
@@ -83,4 +83,11 @@ public class UserModel implements Serializable {
 	}
 
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

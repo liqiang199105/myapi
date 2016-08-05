@@ -28,6 +28,7 @@ public enum ApiError {
     USER_INVALID_PHONE_PWD(1002003, "Invalid phone or password (Sms)"),
     SMS_PHONE_BLACKLISTED(1002004, "Sms phone blacklisted (Sms)"),
     SMS_SEND_MESSAGE_FAILED(1002005, "Sending message failed. (Sms)"),
+    SMS_VERIFY_CODE_ILLEGAL(1002006, "Verify code is illegal. (Sms)"),
 
     ;
 

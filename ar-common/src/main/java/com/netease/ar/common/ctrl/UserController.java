@@ -1,5 +1,6 @@
 package com.netease.ar.common.ctrl;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.netease.ar.common.http.exception.ApiError;
 import com.netease.ar.common.http.exception.ApiException;
@@ -47,8 +48,8 @@ public class UserController {
 		if (!CommonUtil.isMobile(phone)){
 			throw new ApiException(ApiError.USER_INVALID_PHONE);
 		}
-		String code = CommonUtil.getRandomString(6, true);
-		String msg = "校验码：" + code + "，您正在验证手机号 " + phone + " 注意保密哦！";
+		String verifyCode = CommonUtil.getRandomString(6, true);
+		String msg = "校验码：" + verifyCode + "，您正在验证手机号 " + phone + " 注意保密哦！";
 		JSONObject jsonObject = JSONObject.fromObject( smsWebService.sendSMS(phone, msg, country));
 		String respCode = jsonObject.getString("respCode");
 		if ("10000".equals(respCode)) {
@@ -56,6 +57,7 @@ public class UserController {
 		} else if ("400".equals(respCode)) {
 			throw new ApiException(ApiError.SMS_SEND_MESSAGE_FAILED);
 		}
+		userService.replaceVerifyCode(phone, verifyCode);
 		ApiResponseBuilder.buildCallback(response, new ApiResponseBody("发送短信成功"), callback);
 	}
 
@@ -69,9 +71,11 @@ public class UserController {
 	public void reversion(@RequestParam(value = "phone", required = true) String phone,
 						  @RequestParam(value = "verifyCode", required = true) String verifyCode,
 						  HttpServletRequest request, HttpServletResponse response) {
-
 		logger.info(request.getRequestURI());
 
+		if (Strings.isNullOrEmpty(phone) || Strings.isNullOrEmpty(verifyCode)){
+			throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER);
+		}
 		UserModel userModel = userService.register(phone, verifyCode);
 		ApiResponseBuilder.build(response, new ApiResponseBody(userModel));
 

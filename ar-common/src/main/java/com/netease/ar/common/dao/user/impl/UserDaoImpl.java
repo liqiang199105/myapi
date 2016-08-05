@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void replacePhoneVerifyCode(final UserModel userModel){
+    public void replaceUserVerifyCode(final UserModel userModel){
         sqlSession.insert(namespace + "replacePhoneVerifyCode", userModel);
     }
 }
