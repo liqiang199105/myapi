@@ -49,12 +49,12 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
         }
         long current = System.currentTimeMillis();
         long timestampAsLong = Long.valueOf(timestamp);
-        if (current < timestampAsLong || (current - timestampAsLong) > 1000 * 60){
+        if (current < timestampAsLong || (current - timestampAsLong) > 1000 * 60 * 60){
             throw new ApiException(ApiError.API_TIMESTAMP_OUT_OF_RANGE);
         }
 
         final String nonceStr = request.getParameter(ApiSignatureUtil.NONCE_STRING);
-        if (Strings.isNullOrEmpty(ApiSignatureUtil.NONCE_STRING)){
+        if (Strings.isNullOrEmpty(nonceStr)){
             throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER.withParams(ApiSignatureUtil.NONCE_STRING));
         }
 
@@ -77,11 +77,13 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
 
 
     public Map<String,String> getParametersForSign(HttpServletRequest request) throws Exception {
-         Map<String,String> parametersAll =  Maps.newLinkedHashMap();
+         Map<String,String> parameters =  Maps.newLinkedHashMap();
         for (String parameter : request.getParameterMap().keySet()) {
-            parametersAll.put(parameter, Joiner.on(",").join(request.getParameterMap().get(parameter)));
+            if (!ApiSignatureUtil.SIGNATURE.equals(parameter)){
+                parameters.put(parameter, Joiner.on(",").join(request.getParameterMap().get(parameter)));
+            }
         }
-        return parametersAll;
+        return parameters;
     }
 
     public void setEnableUrlSignature(String enableUrlSignature) {
