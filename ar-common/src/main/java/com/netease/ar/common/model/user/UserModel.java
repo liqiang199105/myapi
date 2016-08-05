@@ -4,24 +4,34 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserModel implements Serializable {
-
 	private String userId;
-	private long userNum;
 	private String nick;
-	private String avatar;
-	private int status;
-	private int wealthLevel;
-	private int wealthScore;
-	private String mail;
-	private String phone;
-	private Date createdTime;
 
-	public long getUserNum() {
-		return userNum;
+	public UserModel(String userId, String nick, String avatar, String mail, String phone, String verifyCode, Date lastModified) {
+		this.userId = userId;
+		this.nick = nick;
+		this.avatar = avatar;
+		this.mail = mail;
+		this.phone = phone;
+		this.verifyCode = verifyCode;
+		this.lastModified = lastModified;
 	}
 
-	public void setUserNum(long userNum) {
-		this.userNum = userNum;
+	public UserModel() {
+	}
+
+	private String avatar;
+	private String mail;
+	private String phone;
+	private String verifyCode;
+	private Date lastModified;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getNick() {
@@ -40,30 +50,6 @@ public class UserModel implements Serializable {
 		this.avatar = avatar;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public int getWealthLevel() {
-		return wealthLevel;
-	}
-
-	public void setWealthLevel(int wealthLevel) {
-		this.wealthLevel = wealthLevel;
-	}
-
-	public int getWealthScore() {
-		return wealthScore;
-	}
-
-	public void setWealthScore(int wealthScore) {
-		this.wealthScore = wealthScore;
-	}
-
 	public String getMail() {
 		return mail;
 	}
@@ -80,19 +66,21 @@ public class UserModel implements Serializable {
 		this.phone = phone;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
+	public String getVerifyCode() {
+		return verifyCode;
 	}
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
 	}
 
-	public String getUserId() {
-		return userId;
+	public Date getLastModified() {
+		return lastModified;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
 	}
+
+
 }

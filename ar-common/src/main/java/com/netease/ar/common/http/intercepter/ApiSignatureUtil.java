@@ -1,5 +1,6 @@
 package com.netease.ar.common.http.intercepter;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,7 @@ public class ApiSignatureUtil {
     public static final String SIGNATURE = "sign";
     public static final String TIMESTAMP = "timestamp";
     public static final String APP_KEY = "appKey";
-    public static final String NONCE_STRING = "nonceStr";
+    public static final String NONCE_STRING = "nonceStr";  // RandomStringUtils.randomAlphabetic(16);
 
     /***
      * This method generates the signature given the parameters.  NOTE: it does *no* error-checking

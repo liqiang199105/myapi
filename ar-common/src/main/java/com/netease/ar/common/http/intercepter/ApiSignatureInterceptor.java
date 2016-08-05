@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.netease.ar.common.http.exception.ApiError;
 import com.netease.ar.common.http.exception.ApiException;
 import com.netease.ar.common.utils.DateTimeUtil;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,8 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
-        if (handler.getClass().isAssignableFrom(HandlerMethod.class)){
+        logger.info(request.getRequestURI());
+        if (handler.getClass().isAssignableFrom(HandlerMethod.class) && Boolean.valueOf(enableUrlSignature)){
             HandlerMethod handlerMethod = (HandlerMethod)handler;
             AllowNoSignature allowNoSignature = handlerMethod.getMethodAnnotation(AllowNoSignature.class);
             validateSystemParams(request, null != allowNoSignature);
@@ -51,7 +53,12 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
             throw new ApiException(ApiError.API_TIMESTAMP_OUT_OF_RANGE);
         }
 
-        if(Boolean.valueOf(enableUrlSignature) && allowNoSignature) {
+        final String nonceStr = request.getParameter(ApiSignatureUtil.NONCE_STRING);
+        if (Strings.isNullOrEmpty(ApiSignatureUtil.NONCE_STRING)){
+            throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER.withParams(ApiSignatureUtil.NONCE_STRING));
+        }
+
+        if(allowNoSignature) {
             final String signature = request.getParameter(ApiSignatureUtil.SIGNATURE);
             if(Strings.isNullOrEmpty(signature)) {
                 throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER.withParams(ApiSignatureUtil.SIGNATURE));

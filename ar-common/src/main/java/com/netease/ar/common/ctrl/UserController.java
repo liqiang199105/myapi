@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.netease.ar.common.http.exception.ApiError;
 import com.netease.ar.common.http.exception.ApiException;
 import com.netease.ar.common.http.ApiResponseBody;
+import com.netease.ar.common.http.intercepter.AllowNoSignature;
 import com.netease.ar.common.model.user.UserModel;
 import com.netease.ar.common.service.user.UserService;
 import com.netease.ar.common.http.ApiResponseBuilder;
@@ -32,31 +33,16 @@ public class UserController {
 	@Resource @Qualifier("smsWebService") private SMSForBoBoWebSercice smsWebService;
 
 	/**
-	 * 用户注册登录
-	 * @param phone
-	 * @param verifyCode
-     */
-	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public void reversion(@RequestParam(value = "phone", required = true) String phone,
-						  @RequestParam(value = "verifyCode", required = true) String verifyCode,
-						  HttpServletRequest request, HttpServletResponse response) {
-		logger.info(request.getRequestURI());
-
-		Map<String, Object> map = Maps.newLinkedHashMap();
-		ApiResponseBuilder.build(response, new ApiResponseBody(map));
-
-	}
-
-	/**
 	 * 获取手机验证码
 	 * @param phone 手机号
 	 * @param country 国家编码，例如中国86、台湾886
-     */
-	@RequestMapping(value = "getVerifyCode", method = RequestMethod.GET)
+	 */
+	@AllowNoSignature
+	@RequestMapping(value = "getVerifyCode", method = RequestMethod.POST)
 	public void getVerifyCode(@RequestParam(value = "phone", required = true) String phone,
-							  @RequestParam(value = "code", defaultValue = "86") String country,
+							  @RequestParam(value = "country", defaultValue = "86") String country,
 							  @RequestParam(value = "callback", required = false) String callback,
-							 HttpServletRequest request, HttpServletResponse response) {
+							  HttpServletRequest request, HttpServletResponse response) {
 		logger.info(request.getRequestURI());
 		if (!CommonUtil.isMobile(phone)){
 			throw new ApiException(ApiError.USER_INVALID_PHONE);
@@ -73,6 +59,22 @@ public class UserController {
 		ApiResponseBuilder.buildCallback(response, new ApiResponseBody("发送短信成功"), callback);
 	}
 
+	/**
+	 * 用户注册登录
+	 * @param phone
+	 * @param verifyCode
+     */
+	@RequestMapping(value = "register", method = RequestMethod.POST)
+	@AllowNoSignature
+	public void reversion(@RequestParam(value = "phone", required = true) String phone,
+						  @RequestParam(value = "verifyCode", required = true) String verifyCode,
+						  HttpServletRequest request, HttpServletResponse response) {
 
+		logger.info(request.getRequestURI());
+
+		UserModel userModel = userService.register(phone, verifyCode);
+		ApiResponseBuilder.build(response, new ApiResponseBody(userModel));
+
+	}
 
 }

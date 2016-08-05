@@ -20,7 +20,6 @@ public class AdminController {
 	private static Logger logger = Logger.getLogger(AdminController.class);
 
 	@RequestMapping(value = "/reversion", method = RequestMethod.GET)
-	@AllowNoSignature
 	public void reversion(HttpServletRequest request, HttpServletResponse response) {
 		SpringAppConfig configs[] = new SpringAppConfig[]{
 				SpringAppConfig.APP_VERSION_MAVEN,

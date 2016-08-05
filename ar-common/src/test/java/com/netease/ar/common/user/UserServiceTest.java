@@ -16,5 +16,12 @@ public class UserServiceTest extends BaseTest {
         System.out.println(userService.get("1"));
     }
 
+    @Test
+    public void testRegister(){
+        String phone = "13552862889";
+        String verifyCode = "123456";
+        userService.register(phone, verifyCode);
+    }
+
 
 }

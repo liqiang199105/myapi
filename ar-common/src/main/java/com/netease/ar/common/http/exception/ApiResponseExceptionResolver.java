@@ -20,7 +20,6 @@ public class ApiResponseExceptionResolver extends AbstractHandlerExceptionResolv
     @Override
     protected ModelAndView doResolveException(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final Exception ex) {
         response.setContentType(CONTENT_TYPE);
-
         ApiResponseBody responseBody;
         if(ex instanceof ApiException) {
             ApiError error = ((ApiException)ex).getApiError();
@@ -47,7 +46,6 @@ public class ApiResponseExceptionResolver extends AbstractHandlerExceptionResolv
             logger.error(e.getMessage(), e);
         }
 
-        //irrelevant
         return new ModelAndView();
     }
 }
