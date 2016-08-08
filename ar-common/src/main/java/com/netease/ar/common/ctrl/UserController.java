@@ -58,7 +58,11 @@ public class UserController {
 			throw new ApiException(ApiError.SMS_SEND_MESSAGE_FAILED);
 		}
 		userService.replaceVerifyCode(phone, verifyCode);
-		ApiResponseBuilder.buildCallback(response, new ApiResponseBody("发送短信成功"), callback);
+		Map<String, Object> result = Maps.newHashMap();
+		result.put("msg", "发送验证码成功");
+		result.put("verifyCode", verifyCode);
+		result.put("phone", phone);
+		ApiResponseBuilder.buildCallback(response, new ApiResponseBody(null), callback);
 	}
 
 	/**
