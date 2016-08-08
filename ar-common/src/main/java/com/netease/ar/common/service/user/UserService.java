@@ -8,6 +8,6 @@ import org.eclipse.jetty.server.Authentication;
 public interface UserService {
     public UserModel get(final String userId);
     public UserModel register(final String phone, final String verifyCode) throws ApiException;
-    public void replaceVerifyCode(final String phone, final String verifyCode);
+    public void replaceVerifyCode(final String phone, final String verifyCode) throws ApiException;
 
 }

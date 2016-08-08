@@ -17,7 +17,7 @@ public class ApiResponseBody {
     public ApiResponseBody(final Result result, final int code, final String info) {
         this.result = result;
         this.code = code;
-        this.info = (null == info) ? new String[0] : new String[]{info};
+        this.info = (null == info) ? new String() : info;
     }
 
     private ApiResponseBody(final Result result, final int code, final String info, final String[] errorMsg) {

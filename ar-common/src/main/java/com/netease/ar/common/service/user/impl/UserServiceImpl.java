@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void replaceVerifyCode(final String phone, final String verifyCode){
+    public void replaceVerifyCode(final String phone, final String verifyCode) throws ApiException{
         Jedis jedis = jedisPool.getResource();
         try {
             String verifyCodeKey = RedisKeyUtil.getUserVerifyCodeKey(phone);
