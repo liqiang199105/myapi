@@ -18,6 +18,11 @@
 		SELECT * from user where user_id = #{user_id}
 	</select>
 
+	<select id="getUserByPhone" parameterType="map" resultMap="userMap">
+		SELECT * from user where phone = #{phone}
+	</select>
+
+
 	<insert id="insertUserModel" useGeneratedKeys="true" keyProperty="collectionId" parameterType="com.netease.ar.common.model.user.UserModel">
 		insert into user(user_id, nick, avatar, verify_code, phone, last_modified)
 		VALUE (#{userId}, #{nick}, #{avatar}, #{verifyCode}, #{phone}, #{lastModified});

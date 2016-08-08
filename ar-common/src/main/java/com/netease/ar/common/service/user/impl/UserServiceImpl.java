@@ -47,6 +47,10 @@ public class UserServiceImpl implements UserService{
         Jedis jedis = jedisPool.getResource();
         try {
 
+            UserModel userModel = userDao.getUserByPhone(phone);
+            if (userModel != null) { // 手机号已经注册
+                return userModel;
+            }
             String verifyCodeKey =  RedisKeyUtil.getUserVerifyCodeKey(phone);
             if (jedis.exists(verifyCodeKey) && verifyCode.equals(jedis.get(verifyCodeKey))){ // 认证通过
                 UserModel user = this.userModelBuilder(phone, verifyCode);

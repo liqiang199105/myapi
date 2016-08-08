@@ -27,6 +27,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public UserModel getUserByPhone(final String phone){
+        return (UserModel) sqlSession.selectOne(namespace + "getUserByPhone", phone);
+
+    }
+
+    @Override
     public void replaceUserVerifyCode(final UserModel userModel){
         sqlSession.insert(namespace + "replacePhoneVerifyCode", userModel);
     }
