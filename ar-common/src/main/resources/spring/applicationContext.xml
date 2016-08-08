@@ -91,17 +91,9 @@
 
     <mvc:annotation-driven/>
 
-
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="500" />
-        <property name="maxIdle" value="100" />
-        <property name="maxWaitMillis" value="2000" />
-    </bean>
-
     <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
-        <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${painter.redis.host}"/>
-        <constructor-arg index="2" type="int" value="${painter.redis.port}"/>
+        <constructor-arg index="0" value="${painter.redis.host}"/>
+        <constructor-arg index="1" type="int" value="${painter.redis.port}"/>
     </bean>
 
 
