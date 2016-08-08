@@ -62,7 +62,7 @@ public class UserController {
 		result.put("msg", "发送验证码成功");
 		result.put("verifyCode", verifyCode);
 		result.put("phone", phone);
-		ApiResponseBuilder.buildCallback(response, new ApiResponseBody(null), callback);
+		ApiResponseBuilder.buildCallback(response, new ApiResponseBody(result), callback);
 	}
 
 	/**
