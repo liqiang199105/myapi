@@ -70,6 +70,7 @@ public class UserController {
 	@AllowNoSignature
 	public void reversion(@RequestParam(value = "phone", required = true) String phone,
 						  @RequestParam(value = "verifyCode", required = true) String verifyCode,
+						  @RequestParam(value = "callback", required = false) String callback,
 						  HttpServletRequest request, HttpServletResponse response) {
 		logger.info(request.getRequestURI());
 
@@ -77,7 +78,7 @@ public class UserController {
 			throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER);
 		}
 		UserModel userModel = userService.register(phone, verifyCode);
-		ApiResponseBuilder.build(response, new ApiResponseBody(userModel));
+		ApiResponseBuilder.buildCallback(response, new ApiResponseBody(userModel), callback);
 
 	}
 

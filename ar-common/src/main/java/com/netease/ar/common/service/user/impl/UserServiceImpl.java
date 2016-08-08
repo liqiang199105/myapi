@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 
             String verifyCodeKey =  RedisKeyUtil.getUserVerifyCodeKey(phone);
             if (jedis.exists(verifyCodeKey) && verifyCode.equals(jedis.get(verifyCodeKey))){ // 认证通过
-                UserModel user = this.userModelBuilder(phone);
+                UserModel user = this.userModelBuilder(phone, verifyCode);
 
                 String userTokenKey = RedisKeyUtil.getUserToken(user.getUserId());
                 if (!jedis.exists(userTokenKey)){
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
                 } else {
                     user.setToken(jedis.get(userTokenKey));
                 }
-                return userDao.insert(user);
+                return userDao.insertUserModel(user);
             } else {
                 throw new ApiException(ApiError.SMS_VERIFY_CODE_ILLEGAL);
             }
@@ -89,10 +89,11 @@ public class UserServiceImpl implements UserService{
     // private functions
     // =================================================================================================================
 
-    private UserModel userModelBuilder(final String phone) throws UnsupportedEncodingException {
+    private UserModel userModelBuilder(final String phone, final String verifyCode) throws UnsupportedEncodingException {
         UserModel user = new UserModel();
         String userId = phone + System.currentTimeMillis()  + CommonUtil.getRandomString(16, false);
         user.setPhone(phone);
+        user.setVerifyCode(verifyCode);
         user.setLastModified(new Date());
         user.setAvatar(DEFAULT_PAINTER_AVATAR); // 默认头像
         user.setNick(DEFAULT_PAINTER_NICK_PREFIX + System.currentTimeMillis()); // 默认昵称生成

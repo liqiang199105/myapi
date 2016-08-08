@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public UserModel insert(final UserModel userModel){
+    public UserModel insertUserModel(final UserModel userModel){
         sqlSession.insert(namespace + "insertUserModel", userModel);
         return userModel;
     }

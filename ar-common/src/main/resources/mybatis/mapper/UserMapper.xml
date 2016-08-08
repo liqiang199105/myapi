@@ -18,7 +18,7 @@
 		SELECT * from user where user_id = #{user_id}
 	</select>
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="collectionId" parameterType="com.netease.ar.common.model.user.UserModel">
+	<insert id="insertUserModel" useGeneratedKeys="true" keyProperty="collectionId" parameterType="com.netease.ar.common.model.user.UserModel">
 		insert into user(user_id, nick, avatar, verify_code, phone, last_modified)
 		VALUE (#{userId}, #{nick}, #{avatar}, #{verifyCode}, #{phone}, #{lastModified});
 	</insert>

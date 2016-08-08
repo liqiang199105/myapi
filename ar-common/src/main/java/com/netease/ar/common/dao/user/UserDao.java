@@ -9,5 +9,5 @@ public interface UserDao {
 
     public void replaceUserVerifyCode(final UserModel userModel);
 
-    public UserModel insert(final UserModel userModel);
+    public UserModel insertUserModel(final UserModel userModel);
 }
