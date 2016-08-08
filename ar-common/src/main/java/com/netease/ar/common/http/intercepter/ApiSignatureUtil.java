@@ -12,6 +12,7 @@ public class ApiSignatureUtil {
     public static final String SIGNATURE = "sign";
     public static final String TIMESTAMP = "timestamp";
     public static final String APP_KEY = "appKey";
+    public static final String APP_SECRET = "appSecret";
     public static final String NONCE_STRING = "nonceStr";  // RandomStringUtils.randomAlphabetic(16);
 
     /***
