@@ -49,14 +49,14 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
         }
         long current = System.currentTimeMillis();
         long timestampAsLong = Long.valueOf(timestamp);
-        if (current < timestampAsLong || (current - timestampAsLong) > 1000 * 60 * 60){
+        if (current < timestampAsLong || (current - timestampAsLong) > 1000 * 60){
             throw new ApiException(ApiError.API_TIMESTAMP_OUT_OF_RANGE);
         }
 
-        final String nonceStr = request.getParameter(ApiSignatureUtil.NONCE_STRING);
-        if (Strings.isNullOrEmpty(nonceStr)){
-            throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER.withParams(ApiSignatureUtil.NONCE_STRING));
-        }
+//        final String nonceStr = request.getParameter(ApiSignatureUtil.NONCE_STRING);
+//        if (Strings.isNullOrEmpty(nonceStr)){
+//            throw new ApiException(ApiError.MISSING_REQUIRED_PARAMETER.withParams(ApiSignatureUtil.NONCE_STRING));
+//        }
 
         if(allowNoSignature) {
             final String signature = request.getParameter(ApiSignatureUtil.SIGNATURE);
