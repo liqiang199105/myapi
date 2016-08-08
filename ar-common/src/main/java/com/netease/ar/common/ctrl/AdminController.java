@@ -24,7 +24,7 @@ import java.util.Map;
 public class AdminController {
 	private static Logger logger = Logger.getLogger(AdminController.class);
 
-	@Resource
+	@Resource(name = "jedisPool")
 	private JedisPool jedisPool;
 
 
