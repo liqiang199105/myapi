@@ -8,7 +8,7 @@ public class ApiResponseBody {
     //-------------------------------------------------------------
     private Result result = Result.success;
     private int code = 200;
-    private Object info = new Object[0];
+    private Object info = new Object();
     private String[] errorMsg = new String[0];
 
     //-------------------------------------------------------------
@@ -26,7 +26,7 @@ public class ApiResponseBody {
     }
 
     public ApiResponseBody(final Object info) {
-        this.info = (null == info) ? new Object[0] : info;
+        this.info = (null == info) ? new Object() : info;
     }
 
     public ApiResponseBody(final ApiError apiError) {

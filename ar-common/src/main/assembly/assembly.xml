@@ -22,9 +22,8 @@
 			<directory>src/main/resources/config</directory>
 			<outputDirectory>conf</outputDirectory>
 			<includes>
-				<include>arapi.properties</include>
-				<include>log4j</include>
-				<include>config-base-${profiles.active}.properties</include>
+				<include>painter.properties</include>
+				<include>log4j.properties</include>
 			</includes>
 		</fileSet>
 	</fileSets>
