@@ -65,6 +65,7 @@ public class ApiSignatureInterceptor extends HandlerInterceptorAdapter {
             }
             try {
                 Map<String,String> parameters = getParametersForSign(request);
+                parameters.put("appSecret", ApiClient.getByKey(appKey).getSecretKey());
                 final String calculatedSignature = ApiSignatureUtil.generateSignature(parameters);
                 if(!calculatedSignature.equals(signature)) {
                     throw new ApiException(ApiError.INVALID_SIGNATURE);
