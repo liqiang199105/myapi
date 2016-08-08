@@ -100,7 +100,7 @@
 
     <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
         <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="114.113.202.254"/>
+        <constructor-arg index="1" value="${painter.redis.host}"/>
         <constructor-arg index="2" type="int" value="${painter.redis.port}"/>
     </bean>
 
