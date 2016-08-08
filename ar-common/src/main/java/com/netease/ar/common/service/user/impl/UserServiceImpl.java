@@ -46,15 +46,13 @@ public class UserServiceImpl implements UserService{
     public UserModel register(final String phone, final String verifyCode) throws ApiException{
         Jedis jedis = jedisPool.getResource();
         try {
-
-            UserModel userModel = userDao.getUserByPhone(phone);
-            if (userModel != null) { // 手机号已经注册
-                return userModel;
-            }
             String verifyCodeKey =  RedisKeyUtil.getUserVerifyCodeKey(phone);
             if (jedis.exists(verifyCodeKey) && verifyCode.equals(jedis.get(verifyCodeKey))){ // 认证通过
+                UserModel userModel = userDao.getUserByPhone(phone);
+                if (userModel != null) { // 手机号已经注册
+                    return userModel;
+                }
                 UserModel user = this.userModelBuilder(phone, verifyCode);
-
                 String userTokenKey = RedisKeyUtil.getUserToken(user.getUserId());
                 if (!jedis.exists(userTokenKey)){
                     jedis.setex(user.getUserId(), DateTimeUtil.HOUR * 24, user.getToken());
