@@ -8,4 +8,6 @@ public interface UserDao {
     public UserModel get(final String userId);
 
     public void replaceUserVerifyCode(final UserModel userModel);
+
+    public UserModel insert(final UserModel userModel);
 }

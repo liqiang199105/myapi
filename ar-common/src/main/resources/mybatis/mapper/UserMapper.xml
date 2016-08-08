@@ -18,6 +18,11 @@
 		SELECT * from user where user_id = #{user_id}
 	</select>
 
+	<insert id="insert" useGeneratedKeys="true" keyProperty="collectionId" parameterType="com.netease.ar.common.model.user.UserModel">
+		insert into user(user_id, nick, avatar, verify_code, phone, last_modified)
+		VALUE (#{userId}, #{nick}, #{avatar}, #{verifyCode}, #{phone}, #{lastModified});
+	</insert>
+
 	<insert id="replacePhoneVerifyCode" parameterType="com.netease.ar.common.model.user.UserModel">
 		replace into user(user_id,phone,verify_code,last_modified)
 		values(#{userId},#{phone},#{verifyCode},#{lastModified});

@@ -9,7 +9,16 @@ public class RedisKeyUtil {
      * @param phone
      * @return
      */
-    public static String getUserVerifyCodeKey(String phone){
+    public static String getUserVerifyCodeKey(final String phone){
         return PAINTER + phone + "#";
+    }
+
+    /**
+     * 获取用户的token
+     * @param userId
+     * @return
+     */
+    public static String getUserToken(final String userId){
+        return PAINTER + userId + "#";
     }
 }

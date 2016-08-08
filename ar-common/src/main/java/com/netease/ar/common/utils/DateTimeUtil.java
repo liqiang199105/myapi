@@ -17,6 +17,9 @@ public class DateTimeUtil {
     public static final DateTimeFormatter YYYY_MM_DD = DateTimeFormat.forPattern("yyyy-MM-dd");
     public static final DateTimeFormatter HH_MM_SS = DateTimeFormat.forPattern("HH:mm:ss");
 
+    public static final int SECOND = 1000;
+    public static final int MINUTE = SECOND * 60;
+    public static final int HOUR = MINUTE * 60;
 
     /**
      * 字符串转换为日期
