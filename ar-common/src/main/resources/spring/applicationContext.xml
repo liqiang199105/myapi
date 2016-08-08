@@ -24,12 +24,12 @@
     <bean id="propertiesReader" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath*:/config/painter.properties</value>
+                <value>classpath*:/config/painter.dev.properties</value>
             </list>
         </property>
     </bean>
     <!-- 读取JDBC配置文件 -->
-    <context:property-placeholder location="classpath:config/painter.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:config/painter.dev.properties" ignore-unresolvable="true"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">

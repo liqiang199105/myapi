@@ -123,7 +123,7 @@
             <id>dev</id>
             <properties>
                 <front-compress>false</front-compress>
-                <profiles.active>test</profiles.active>
+                <profiles.active>dev</profiles.active>
                 <MODE>1</MODE>
             </properties>
             <activation>
@@ -137,7 +137,7 @@
             <id>prod</id>
             <properties>
                 <front-compress>false</front-compress>
-                <profiles.active>test</profiles.active>
+                <profiles.active>prod</profiles.active>
                 <MODE>2</MODE>
             </properties>
             <modules>

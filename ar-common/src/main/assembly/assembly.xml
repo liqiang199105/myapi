@@ -22,7 +22,7 @@
 			<directory>src/main/resources/config</directory>
 			<outputDirectory>conf</outputDirectory>
 			<includes>
-				<include>painter.properties</include>
+				<include>painter.${profiles.active}.properties</include>
 				<include>log4j.properties</include>
 			</includes>
 		</fileSet>
