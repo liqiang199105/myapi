@@ -87,7 +87,7 @@
         </property>
     </bean>
 
-    <!--<bean id="apiResponseExceptionResolver" class="com.netease.ar.common.http.exception.ApiResponseExceptionResolver"/>-->
+    <bean id="apiResponseExceptionResolver" class="com.netease.ar.common.http.exception.ApiResponseExceptionResolver"/>
 
     <mvc:annotation-driven/>
 
