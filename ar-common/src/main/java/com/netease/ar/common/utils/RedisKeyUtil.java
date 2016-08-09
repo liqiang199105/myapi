@@ -21,4 +21,12 @@ public class RedisKeyUtil {
     public static String getUserToken(final String userId){
         return PAINTER + userId + "#";
     }
+
+    /**
+     * 主播昵称index
+     * @return
+     */
+    public static String getUserNickIndex(){
+        return PAINTER + "Index#";
+    }
 }

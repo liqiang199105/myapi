@@ -96,7 +96,8 @@ public class UserServiceImpl implements UserService{
 
         String userTokenKey = RedisKeyUtil.getUserToken(user.getUserId());
         if (!jedis.exists(userTokenKey)){
-            user.setToken(DigestUtils.md5DigestAsHex(user.getUserId().getBytes("UTF-8")).toLowerCase()); // userId 二次MD5生成token
+            String token =  userId +  System.currentTimeMillis();
+            user.setToken(DigestUtils.md5DigestAsHex(token.getBytes("UTF-8")).toLowerCase()); // MD5生成token
             jedis.setex(user.getUserId(), DateTimeUtil.HOUR * 24, user.getToken());
         } else {
             user.setToken(jedis.get(userTokenKey));
