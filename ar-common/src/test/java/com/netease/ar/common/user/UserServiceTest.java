@@ -21,12 +21,12 @@ public class UserServiceTest extends BaseTest {
 
     @Test
     public void testRegister() throws UnsupportedEncodingException {
-//        String phone = "13552862889";
-//        String verifyCode = "123456";
-//        userService.register(phone, verifyCode);
-        StringBuilder sb = new StringBuilder();
-        sb.append("123abc");
-        System.out.println( DigestUtils.md5DigestAsHex(sb.toString().getBytes("UTF-8")).toLowerCase());
+        String phone = "13552862889";
+        String verifyCode = "123456";
+        userService.register(phone, verifyCode);
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("123abc");
+//        System.out.println( DigestUtils.md5DigestAsHex(sb.toString().getBytes("UTF-8")).toLowerCase());
     }
 
 }

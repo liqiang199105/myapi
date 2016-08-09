@@ -24,7 +24,7 @@ import java.util.Date;
 public class UserServiceImpl implements UserService{
     private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
-    private static final String DEFAULT_PAINTER_AVATAR = "https://gitlab.ws.netease.com/uploads/user/avatar/279/popo_2016-07-27__17-47-52.jpg";
+    private static final String DEFAULT_PAINTER_AVATAR = "http://bobo-public.nosdn.127.net/bobo_1470727094381_91088576.png";
     private static final String DEFAULT_PAINTER_NICK_PREFIX = "一直小潘塔#";
 
     @Resource private UserDao userDao;
@@ -52,13 +52,7 @@ public class UserServiceImpl implements UserService{
                 if (userModel != null) { // 手机号已经注册
                     return userModel;
                 }
-                UserModel user = this.userModelBuilder(phone, verifyCode);
-                String userTokenKey = RedisKeyUtil.getUserToken(user.getUserId());
-                if (!jedis.exists(userTokenKey)){
-                    jedis.setex(user.getUserId(), DateTimeUtil.HOUR * 24, user.getToken());
-                } else {
-                    user.setToken(jedis.get(userTokenKey));
-                }
+                UserModel user = this.userModelBuilder(phone, verifyCode, jedis);
                 return userDao.insertUserModel(user);
             } else {
                 throw new ApiException(ApiError.SMS_VERIFY_CODE_ILLEGAL);
@@ -91,16 +85,28 @@ public class UserServiceImpl implements UserService{
     // private functions
     // =================================================================================================================
 
-    private UserModel userModelBuilder(final String phone, final String verifyCode) throws UnsupportedEncodingException {
+    private UserModel userModelBuilder(final String phone, final String verifyCode, final Jedis jedis) throws UnsupportedEncodingException {
         UserModel user = new UserModel();
         String userId = phone + System.currentTimeMillis()  + CommonUtil.getRandomString(16, false);
         user.setPhone(phone);
         user.setVerifyCode(verifyCode);
         user.setLastModified(new Date());
         user.setAvatar(DEFAULT_PAINTER_AVATAR); // 默认头像
-        user.setNick(DEFAULT_PAINTER_NICK_PREFIX + System.currentTimeMillis()); // 默认昵称生成
         user.setUserId(DigestUtils.md5DigestAsHex(userId.getBytes("UTF-8")).toLowerCase());
-        user.setToken(DigestUtils.md5DigestAsHex(user.getUserId().getBytes("UTF-8")).toLowerCase()); // userId 二次MD5生成token
+
+        String userTokenKey = RedisKeyUtil.getUserToken(user.getUserId());
+        if (!jedis.exists(userTokenKey)){
+            user.setToken(DigestUtils.md5DigestAsHex(user.getUserId().getBytes("UTF-8")).toLowerCase()); // userId 二次MD5生成token
+            jedis.setex(user.getUserId(), DateTimeUtil.HOUR * 24, user.getToken());
+        } else {
+            user.setToken(jedis.get(userTokenKey));
+        }
+
+        String nickIndexKey = RedisKeyUtil.getUserNickIndex();
+        int index = Integer.valueOf(jedis.exists(nickIndexKey) ? jedis.get(nickIndexKey) : "1000");
+        jedis.set(nickIndexKey, String.valueOf(++index));
+        user.setNick(DEFAULT_PAINTER_NICK_PREFIX + index); // 默认昵称生成
+
         return user;
 
     }
