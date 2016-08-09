@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
     private static final String DEFAULT_PAINTER_NICK_PREFIX = "一直小潘塔#";
 
     @Resource private UserDao userDao;
-    @Resource private JedisPool jedisPool;
+    @Resource(name = "jedisPool") private JedisPool jedisPool;
 
     @Override
     public UserModel get(final String userId){
