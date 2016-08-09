@@ -51,7 +51,6 @@ public class AdminController {
 			map.put("app.version.jedis.status", false);
 			logger.error(e);
 		} finally {
-			logger.info(jedisPool.getNumActive());
 			jedisPool.returnResource(jedis);
 		}
 		logger.info(map);
