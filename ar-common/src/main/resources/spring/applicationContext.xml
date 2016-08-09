@@ -93,8 +93,8 @@
 
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="500" />
-        <property name="maxIdle" value="100" />
+        <property name="maxTotal" value="5000" />
+        <property name="maxIdle" value="1000" />
         <property name="maxWaitMillis" value="2000" />
     </bean>
 
