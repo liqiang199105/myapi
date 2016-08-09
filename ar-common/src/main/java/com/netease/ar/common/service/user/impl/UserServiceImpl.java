@@ -109,6 +109,5 @@ public class UserServiceImpl implements UserService{
         user.setNick(DEFAULT_PAINTER_NICK_PREFIX + index); // 默认昵称生成
 
         return user;
-
     }
 }
