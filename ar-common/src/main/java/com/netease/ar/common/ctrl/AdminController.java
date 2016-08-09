@@ -24,8 +24,7 @@ import java.util.Map;
 public class AdminController {
 	private static Logger logger = Logger.getLogger(AdminController.class);
 
-	@Resource(name = "jedisPool")
-	private JedisPool jedisPool;
+	@Resource(name = "jedisPool") private JedisPool jedisPool;
 
 
 	@RequestMapping(value = "/reversion", method = RequestMethod.GET)
@@ -47,11 +46,12 @@ public class AdminController {
 		Jedis jedis = jedisPool.getResource();
 		try {
 			jedis.setex(RedisKeyUtil.PAINTER, 100, "1");
-			map.put("painter.jedis.status", jedis.exists(RedisKeyUtil.PAINTER));
+			map.put("app.version.jedis.status", jedis.exists(RedisKeyUtil.PAINTER));
 		} catch (Exception e){
-			map.put("painter.jedis.status", false);
+			map.put("app.version.jedis.status", false);
 			logger.error(e);
 		} finally {
+			logger.info(jedisPool.getNumActive());
 			jedisPool.returnResource(jedis);
 		}
 		logger.info(map);
